@@ -1,0 +1,6 @@
+venv
+
+.terraform
+*.tfstate*
+terraform.tfvars
+*.csv
