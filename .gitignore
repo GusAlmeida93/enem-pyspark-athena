@@ -4,3 +4,6 @@ venv
 *.tfstate*
 terraform.tfvars
 *.csv
+
+data/
+output/
