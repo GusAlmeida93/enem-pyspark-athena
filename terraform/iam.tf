@@ -1,6 +1,5 @@
 resource "aws_iam_role" "crawler" {
     name               = "enem-pyspark-athena-glue-crawler"
-    path               = "/mba/xp/"
     assume_role_policy = data.aws_iam_policy_document.policy_glue_service.json
 }
 
@@ -23,7 +22,7 @@ data "aws_iam_policy_document" "policy_gold_bucket" {
         ]
 
         resources = [
-            aws_s3_bucket.gold.arn
+            "${aws_s3_bucket.gold.arn}*"
         ]
     }
 
@@ -42,4 +41,9 @@ data "aws_iam_policy_document" "policy_glue_service" {
         }
     }
 
+}
+
+resource "aws_iam_role_policy_attachment" "glue_service_role" {
+  role       = aws_iam_role.crawler.id
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
