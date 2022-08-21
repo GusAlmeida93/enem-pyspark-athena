@@ -5,9 +5,19 @@ terraform {
       version = "~> 4.0"
     }
   }
+
+  backend "s3"{
+    bucket = "enem-pyspark-athena-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+    dynamodb_table = "enem-pyspark-athena-tfstate"
+    profile = "datasouls"
+
+  }
+
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  profile = "datasouls"
+  region  = var.region
+  profile = var.profile
 }

@@ -1,30 +1,30 @@
 resource "aws_s3_bucket" "bronze" {
-  bucket = "enem-pyspark-athena-bronze"
-  tags = {
-    Name    = "ENEM Pyspark Athena Bronze"
-    Project = "MBA XP Engenharia de Dados"
-  }
+  bucket = "${var.project_name}-bronze"
+  tags = {"Name" : "${var.tags["Name"]} Bronze",
+          "Project" : var.tags["Project"]}
 }
 
 resource "aws_s3_bucket" "silver" {
-  bucket = "enem-pyspark-athena-silver"
-  tags = {
-    Name    = "ENEM Pyspark Athena Silver"
-    Project = "MBA XP Engenharia de Dados"
-  }
+
+  bucket = "${var.project_name}-silver"
+  tags =  {"Name" : "${var.tags["Name"]} Silver",
+           "Project" : var.tags["Project"]}
 }
 
 resource "aws_s3_bucket" "gold" {
-  bucket = "enem-pyspark-athena-gold"
-  tags = {
-    Name    = "ENEM Pyspark Athena Gold"
-    Project = "MBA XP Engenharia de Dados"
-  }
+  bucket = "${var.project_name}-gold"
+  tags = {"Name" : "${var.tags["Name"]} Gold",
+          "Project" : var.tags["Project"]}
 }
 
 resource "aws_s3_bucket" "athena" {
   bucket = "datasouls-athena-query-results"
-  tags = {
-    Name = "Athena Query Results"
-  }
+  tags = {"Name" : "Athena Query Results",
+          "Project" : var.tags["Project"]}
+}
+
+resource "aws_s3_bucket" "tfstate" {
+  bucket = "${var.project_name}-tfstate"
+  tags   = {"Name" : "${var.tags["Name"]} Tfstate", 
+            "Project" : var.tags["Project"]}
 }

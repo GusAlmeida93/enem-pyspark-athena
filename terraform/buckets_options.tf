@@ -30,3 +30,24 @@ resource "aws_s3_bucket_acl" "athena_acl" {
     aws_s3_bucket.athena
   ]
 }
+
+
+resource "aws_s3_bucket_acl" "tfstate_acl" {
+  bucket = aws_s3_bucket.tfstate.id
+  acl    = "private"
+  depends_on = [
+    aws_s3_bucket.tfstate
+  ]
+}
+
+resource "aws_s3_bucket_versioning" "tfstate_versioning" {
+  bucket = aws_s3_bucket.tfstate.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+
+  depends_on = [
+    aws_s3_bucket.tfstate
+  ]
+
+}
